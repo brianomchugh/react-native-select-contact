@@ -13,6 +13,8 @@ const ActionSheet = Platform.select({
     android: ActionSheetAndroid
 });
 
+let textColor = "blue"
+
 let currentlyOpen = false;
 
 const SelectContactApi = {
@@ -61,7 +63,8 @@ const SelectContactApi = {
           })
     },
 
-    selectContactPhone() {
+    selectContactPhone(style) {
+        textColor = style.color
         return SelectContactApi.selectContact()
             .then(contact => {
                 if (!contact) {
@@ -125,7 +128,7 @@ function selectPhone(phones) {
                 title: 'Select Phone',
                 options: options,
                 cancelButtonIndex: options.length - 1,
-                tintColor: 'blue'
+                tintColor: textColor
             },
             (buttonIndex) => {
                 resolve(phones[buttonIndex]);
